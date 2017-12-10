@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("user")
 public class UserController {
@@ -19,37 +21,44 @@ public class UserController {
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String add(Model model) {
+        String  verify = "password";
         model.addAttribute("title", "Add User");
         model.addAttribute(new User());
-        model.addAttribute("verify", "");
+//        model.addAttribute("verify", "verify");
+//        model.addAttribute(verify);
         return "user/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(Model model, @ModelAttribute User user, String verify) {
+    public String add(Model model, @ModelAttribute User user) {//, @ModelAttribute @Valid String verify) {
         model.addAttribute(user);
-        model.addAttribute(verify);
+        /*if (verify == null) {
+            model.addAttribute("title", "verify is null");
+            model.addAttribute("verify", "verify");
+            return "user/add";
+        }
+        model.addAttribute(verify);*/
         /*if (user == null) {
-            model.addAttribute("title", "Add User");
-            model.addAttribute("verify", "");
+            model.addAttribute("title", "user is null");
+            model.addAttribute("verify", "verify");
             return "user/add";
         }
         else */if (user.getPassword() == null) {
-            model.addAttribute("title", "Add User");
-            model.addAttribute("verify", "");
+            model.addAttribute("title", "password is null");
+            model.addAttribute("verify", "verify");
             return "user/add";
         }
         else if (user.getPassword().equals("")) {
-            model.addAttribute("title", "Add User");
-            model.addAttribute("verify", "");
+            model.addAttribute("title", "password is empty");
+            model.addAttribute("verify", "verify");
             return "user/add";
         }
-        else if (!user.getPassword().equals(verify)) {
-            model.addAttribute("title", "Add User");
-            model.addAttribute("verify", "");
+        else if (!user.getPassword().equals(user.getVerify())) {
+            model.addAttribute("title", "password \"" + user.getPassword() + "\" not equal to verify \"" + user.getVerify() + '"');
+            model.addAttribute("verify", "verify");
             return "user/add";
         }
-        model.addAttribute("title", "Hello username");
+        model.addAttribute("title", "Hello " + user.getUsername());
         return "user/index";//"redirect:";
     }
 }
