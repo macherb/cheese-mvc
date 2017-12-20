@@ -1,6 +1,6 @@
-package com.example.cheesemvc.controllers;
+package org.launchcode.controllers;
 
-import com.example.cheesemvc.models.User;
+import org.launchcode.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,26 +24,26 @@ public class UserController {
         String  verify = "password";
         model.addAttribute("title", "Add User");
         model.addAttribute(new User());
-//        model.addAttribute("verify", "verify");
-//        model.addAttribute(verify);
+        model.addAttribute("verify", "verify");
+        model.addAttribute(verify);
         return "user/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(Model model, @ModelAttribute User user) {//, @ModelAttribute @Valid String verify) {
+    public String add(Model model, @ModelAttribute User user, @ModelAttribute @Valid String verify) {
         model.addAttribute(user);
-        /*if (verify == null) {
+        if (verify == null) {
             model.addAttribute("title", "verify is null");
             model.addAttribute("verify", "verify");
             return "user/add";
         }
-        model.addAttribute(verify);*/
-        /*if (user == null) {
+        model.addAttribute(verify);
+        if (user == null) {
             model.addAttribute("title", "user is null");
             model.addAttribute("verify", "verify");
             return "user/add";
         }
-        else */if (user.getPassword() == null) {
+        else if (user.getPassword() == null) {
             model.addAttribute("title", "password is null");
             model.addAttribute("verify", "verify");
             return "user/add";
