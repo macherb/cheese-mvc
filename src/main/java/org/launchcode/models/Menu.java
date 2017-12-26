@@ -49,6 +49,10 @@ public class Menu {
         cheeses.add(item);
     }
 
+    /**public void removeItem(Cheese item) {
+        cheeses.remove(item);
+    }**/
+
     public List<Cheese> getCheeses() {
         return cheeses;
     }
