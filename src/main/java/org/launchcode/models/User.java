@@ -1,9 +1,17 @@
 package org.launchcode.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Entity
 public class User {
+    @Id
+    @GeneratedValue
+    private int id;
+
     @NotNull
     @Size(min=1, message = "User Name must not be empty")
     private String  username;
