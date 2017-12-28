@@ -1,6 +1,8 @@
 package org.launchcode.controllers;
 
 import org.launchcode.models.User;
+import org.launchcode.models.data.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,10 +14,14 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("user")
 public class UserController {
+    @Autowired
+    private UserDao userDao;
+
     // Request path: /user
     @RequestMapping(value = "")
     public String index(Model model) {
         model.addAttribute("title", "Hello username");
+        model.addAttribute("users", userDao.findAll());
         return "user/index";
     }
 
@@ -31,13 +37,14 @@ public class UserController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(Model model, @ModelAttribute User user, @ModelAttribute @Valid String verify) {
-        model.addAttribute(user);
+        userDao.save(user);
+        //model.addAttribute(user);
         if (verify == null) {
             model.addAttribute("title", "verify is null");
             model.addAttribute("verify", "verify");
             return "user/add";
         }
-        model.addAttribute(verify);
+        //model.addAttribute(verify);
         if (user == null) {
             model.addAttribute("title", "user is null");
             model.addAttribute("verify", "verify");
