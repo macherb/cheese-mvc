@@ -5,7 +5,7 @@
 
 <h1 th:text="${title}">Default Title</h1>
 
-<nav th:replace="fragments :: navigation"></nav>
+<nav th:replace="fragments :: navigationMenu_cheeses"></nav>
 
 <form method="post" style="max-width:600px;" th:object="${form}" action="/menu/add-item">
 
