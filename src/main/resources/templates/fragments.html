@@ -10,11 +10,44 @@
 </head>
 <body>
 
-<nav th:fragment="navigation">
+<nav th:fragment="navigationCategory">
+    <a href="/category">List</a> |
+    <a href="/category/add">Add</a> |
+    <a href="/cheese">Cheese</a> |
+    <a href="/menu">Menu</a> |
+    <a href="/user">User</a>
+</nav>
+
+<nav th:fragment="navigationCheese">
     <a href="/cheese">List</a> |
     <a href="/cheese/add">Add</a> |
     <a href="/cheese/remove">Remove</a> |
-    <a href="/category">Category</a>
+    <a href="/category">Category</a> |
+    <a href="/menu">Menu</a> |
+    <a href="/user">User</a>
+</nav>
+
+<nav th:fragment="navigationMenu">
+    <a href="/menu">List</a> |
+    <a href="/menu/add">Add</a> |
+    <a href="/category">Category</a> |
+    <a href="/cheese">Cheese</a> |
+    <a href="/user">User</a>
+</nav>
+
+<nav th:fragment="navigationMenu_cheeses">
+    <a href="/category">Category</a> |
+    <a href="/cheese">Cheese</a> |
+    <a href="/menu">Menu</a> |
+    <a href="/user">User</a>
+</nav>
+
+<nav th:fragment="navigationUser">
+    <a href="/user">List</a> |
+    <a href="/user/add">Add</a> |
+    <a href="/category">Category</a> |
+    <a href="/cheese">Cheese</a> |
+    <a href="/menu">Menu</a>
 </nav>
 
 </body>
