@@ -5,5 +5,24 @@
 
 <h1 th:text="${title}">Default Title</h1>
 
+<nav th:replace="fragments :: navigationUser"></nav>
+
+<p th:unless="${users} and ${users.size()}">no user :(</p>
+
+<table class="table">
+
+    <tr>
+        <th>User Name</th>
+        <th>Email</th>
+        <th>Password</th>
+    </tr>
+
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.password}"></td>
+    </tr>
+
+</table>
 </body>
 </html>
