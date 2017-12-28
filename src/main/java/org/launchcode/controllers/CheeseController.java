@@ -6,7 +6,6 @@ import org.launchcode.models.Menu;
 import org.launchcode.models.data.CategoryDao;
 import org.launchcode.models.data.CheeseDao;
 import org.launchcode.models.data.MenuDao;
-import org.launchcode.models.forms.AddMenuItemForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -89,15 +88,6 @@ public class CheeseController {
                 }
             }
         }
-        /**Menu menu = menuDao.findOne(1);
-        AddMenuItemForm form = new AddMenuItemForm(
-                cheeseDao.findAll(),
-                menu);
-        Cheese theCheese = cheeseDao.findOne(form.getCheeseId());
-        Menu theMenu = menuDao.findOne(form.getMenuId());
-        theMenu.removeItem(theCheese);
-        menuDao.save(theMenu);
-        cheeseDao.delete(2);**/
         return "redirect:";
     }
 
@@ -107,11 +97,12 @@ public class CheeseController {
         List<Cheese> cheeses = cat.getCheeseList();
         model.addAttribute("cheeses", cheeses);
         model.addAttribute("title", "Cheeses in Category: " + cat.getName());
-        return "cheese/index";
+        return "cheese/category";
     }
 
     @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.GET)
     public String displayEditForm(Model model, @PathVariable int cheeseId) {
+        model.addAttribute("title", "Edit Cheese");
         Cheese newCheese = cheeseDao.findOne(cheeseId);
         model.addAttribute("cheeseId", cheeseId);
         model.addAttribute("name", newCheese.getName());
