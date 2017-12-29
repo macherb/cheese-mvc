@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
+<body>
 
-<h1 th:text="${title}">Default Title</h1>
+<!--<h1 th:text="${title}">Default Title</h1>-->
 
 <nav th:replace="fragments :: navigationUser"></nav>
 
-<p th:unless="${users} and ${users.size()}">no user :(</p>
+<p style="margin-top:72px" th:unless="${users} and ${users.size()}">no user :(</p>
 
-<table class="table">
+<table class="table" style="margin-top:72px">
 
     <tr>
         <th>User Name</th>
