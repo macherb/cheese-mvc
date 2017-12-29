@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
+<body>
 
-<h1 th:text="${title}">Default Title</h1>
+<!--<h1 th:text="${title}">Default Title</h1>-->
 
 <nav th:replace="fragments :: navigationCheese"></nav>
 
-<form method="post">
+<form method="post" style="margin-top:72px">
 
-    <div th:each="cheese : ${cheeses}" class="checkbox">
+    <div th:each="cheese : ${cheeses}">
         <input type="checkbox" name="cheeseIds" th:value="${cheese.id}" th:id="${cheese.id}"/>
         <label th:for="${cheese.id}" th:text="${cheese.name}"></label>
         <br />
