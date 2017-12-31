@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
+
+<script>
+$(document).ready(function(){
+    $('.btn-primary').tooltip({title: "Save these changes", trigger: "hover"});
+    $('.form-control-static').tooltip({title: "Name must be between three and fifteen characters", trigger: "hover"});
+    $('.form-control-label').tooltip({title: "Description must be at least one character", trigger: "hover"});
+    $('.form-control-warning').tooltip({title: "Category must be one of these", trigger: "hover"});
+});
+</script>
+
 <body>
 
 <nav th:replace="fragments :: navigationCheese"></nav>
@@ -8,18 +18,18 @@
 <form method="post" style="max-width:600px;margin-top:72px" th:object="${newCheese}">
     <div class="form-group">
         <label th:for="name">Name</label>
-        <input class="form-control" id="name" name="name" th:value="${name}" />
+        <input class="form-control form-control-static" id="name" name="name" placeholder="The name the cheese will be known as" th:value="${name}" />
 <!--        <span th:errors="${name}" class="error"></span>-->
     </div>
     <div class="form-group">
         <label th:for="description">Description</label>
-        <input class="form-control" id="description" name="description" th:value="${description}" />
+        <input class="form-control form-control-label" id="description" name="description" placeholder="A short summary of the cheese" th:value="${description}" />
 <!--        <span th:errors="*{description}" class="error"></span>-->
     </div>
 
     <div class="form-group">
         <label th:for="type">Type</label>
-        <select name="categoryId">
+        <select class="form-control form-control-warning" name="categoryId">
             <option th:each="categori : ${categories}"
                     th:text="${categori.name}"
                     th:value="${categori.id}"
@@ -29,7 +39,7 @@
     </div>
     <input type="hidden" th:value="${cheeseId}" name="cheeseId" />
 
-    <input type="submit" value="Edit Cheese" />
+    <input class="btn btn-primary" type="submit" value="Edit Cheese" />
 </form>
 
 </body>
