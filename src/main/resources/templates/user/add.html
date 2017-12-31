@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
+
+<script>
+$(document).ready(function(){
+    $('.btn-primary').tooltip({title: "Add this user to the database", trigger: "hover"});
+    $('.form-control-static').tooltip({title: "Username must be at least one character", trigger: "hover"});
+    $('.form-control-label').tooltip({title: "Email must be at least one character", trigger: "hover"});
+    $('.form-control-warning').tooltip({title: "Password must be at least one character", trigger: "hover"});
+    $('.form-control-success').tooltip({title: "Must also be at least one character", trigger: "hover"});
+});
+</script>
+
 <body>
 
 <!--<h1 th:text="${title}">Default Title</h1>-->
@@ -10,27 +21,27 @@
 <form method="post" style="max-width:600px;margin-top:72px" th:object="${user}">
     <div class="form-group">
         <label th:for="username">Username</label>
-        <input class="form-control" th:field="*{username}" />
+        <input class="form-control form-control-static" placeholder="The name you want to be known as" th:field="*{username}" />
         <span th:errors="*{username}" class="error"></span>
     </div>
     <div class="form-group">
         <label th:for="email">Email</label>
-        <input class="form-control" type="email" th:field="*{email}" />
+        <input class="form-control form-control-label" type="email" placeholder="Where you want emails to be sent to" th:field="*{email}" />
         <span th:errors="*{email}" class="error"></span>
     </div>
 
     <div class="form-group">
         <label th:for="password">Password</label>
-        <input type="password" class="form-control" th:field="*{password}" />
+        <input type="password" class="form-control form-control-warning" placeholder="Can contain letters, numbers and special characters" th:field="*{password}" />
         <span th:errors="*{password}" class="error"></span>
     </div>
 
     <div class="form-group">
         <label th:for="verify">Verify Password</label>
-        <input type="password" class="form-control" th:field="*{verify}" />
+        <input type="password" class="form-control form-control-success" placeholder="Must be the same as your password" th:field="*{verify}" />
     </div>
 
-    <input type="submit" value="Add User" />
+    <input class="btn btn-primary" type="submit" value="Add User" />
 </form>
 
 </body>
