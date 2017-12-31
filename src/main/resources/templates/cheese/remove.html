@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
+
+<script>
+$(document).ready(function(){
+    $('.btn-primary').tooltip({title: "Remove these cheese(s) from the database", trigger: "hover"});
+});
+
+function callFunction() {
+  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+
+  document.querySelectorAll('input[type="submit"]')[0].disabled = true;
+  if (checkedOne) {
+    document.querySelectorAll('input[type="submit"]')[0].disabled = false;
+  }
+}
+</script>
+
 <body>
 
 <!--<h1 th:text="${title}">Default Title</h1>-->
@@ -10,12 +27,12 @@
 <form method="post" style="margin-top:72px">
 
     <div th:each="cheese : ${cheeses}">
-        <input type="checkbox" name="cheeseIds" th:value="${cheese.id}" th:id="${cheese.id}"/>
+        <input type="checkbox" name="cheeseIds" onchange="callFunction()" th:value="${cheese.id}" th:id="${cheese.id}"/>
         <label th:for="${cheese.id}" th:text="${cheese.name}"></label>
         <br />
     </div>
 
-    <input type="submit" value="Remove Cheese" />
+    <input disabled="" class="btn btn-primary" type="submit" value="Remove Cheese(s)" />
 </form>
 
 </body>
