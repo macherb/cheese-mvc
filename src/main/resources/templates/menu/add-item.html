@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
+
+<script>
+$(document).ready(function(){
+    $('.btn-primary').tooltip({title: "Add this cheese to the menu", trigger: "hover"});
+    $('.form-control-static').tooltip({title: "Cheese must be one of these", trigger: "hover"});
+});
+</script>
+
 <body>
 
 <!--<h1 th:text="${title}">Default Title</h1>-->
@@ -11,7 +19,7 @@
 
     <div class="form-group">
         <label th:for="cheeseId">Cheese</label>
-        <select name="cheeseId">
+        <select class="form-control form-control-static" name="cheeseId">
             <option th:each="cheese : *{cheeses}"
                     th:text="${cheese.name}"
                     th:value="${cheese.id}"></option>
@@ -20,7 +28,7 @@
 
     <input type="hidden" name="menuId" th:value="*{menu.id}" />
 
-    <input type="submit" value="Add Item" />
+    <input class="btn btn-primary" type="submit" value="Add Item" />
 </form>
 
 </body>
