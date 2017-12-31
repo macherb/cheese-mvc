@@ -30,6 +30,8 @@ public class Cheese {
 
     ///private List<Cheese> cheeses;
 
+    public static String titleList = "My Cheeses";
+
     public Cheese(String name, String description) {
         this.name = name;
         this.description = description;
