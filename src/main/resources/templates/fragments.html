@@ -69,7 +69,7 @@
 
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li th:class="${title == 'My Cheeses' ? 'active' : ''}"><a href="/cheese">List</a></li>
+                <li th:class="${title == cheese.titleList ? 'active' : ''}"><a href="/cheese">List</a></li>
                 <li th:class="${title == 'Add Cheese' ? 'active' : ''}"><a href="/cheese/add">Add</a></li>
                 <li th:class="${title == 'Remove Cheese' ? 'active' : ''}"><a href="/cheese/remove">Remove</a></li>
                 <li class="dropdown">
