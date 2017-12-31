@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
+
+<script>
+$(document).ready(function(){
+    $('.btn-primary').tooltip({title: "Add this category to the database", trigger: "hover"});
+    $('.form-control-static').tooltip({title: "Name must be between three and fifteen characters", trigger: "hover"});
+});
+</script>
+
 <body>
 
 <!--<h1 th:text="${title}">Default Title</h1>-->
@@ -10,11 +18,11 @@
 <form method="post" style="max-width:600px;margin-top:72px" th:object="${category}">
     <div class="form-group">
         <label th:for="name">Name</label>
-        <input class="form-control" th:field="*{name}" />
+        <input class="form-control form-control-static" placeholder="The name the category will be known as" th:field="*{name}" />
         <span th:errors="*{name}" class="error"></span>
     </div>
 
-    <input type="submit" value="Add Category" />
+    <input class="btn btn-primary" type="submit" value="Add Category" />
 </form>
 
 </body>
