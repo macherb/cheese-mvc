@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
 <body>
 
 <!--<h1 th:text="${title}">Default Title</h1>-->
@@ -17,7 +24,7 @@
 
     <tr th:each="menu : ${menus}">
         <td>
-            <a th:href="'/menu/view/' + ${menu.id}" th:text="${menu.name}"></a>
+            <a data-toggle="tooltip" th:title="'Click to see a list of cheeses in the ' + ${menu.name} + ' menu'"  th:href="'/menu/view/' + ${menu.id}" th:text="${menu.name}"></a>
         </td>
     </tr>
 
