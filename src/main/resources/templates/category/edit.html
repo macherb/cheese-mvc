@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<script>
+$(document).ready(function(){
+    $('.btn-primary').tooltip({title: "Save these changes", trigger: "hover"});
+    $('.form-control-static').tooltip({title: "Name must be between three and fifteen characters", trigger: "hover"});
+});
+</script>
+<body>
+
+<nav th:replace="fragments :: navigationCategory"></nav>
+
+<form method="post" style="max-width:600px;margin-top:72px" th:object="${newCategory}">
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control form-control-static" id="name" name="name" placeholder="The name the category will be known as" th:value="${name}" />
+        <span th:errors="${name}" class="error"></span>
+    </div>
+    <input type="hidden" th:value="${categoryId}" name="categoryId" />
+
+    <input class="btn btn-primary" type="submit" value="Edit Category" />
+</form>
+
+</body>
+</html>
