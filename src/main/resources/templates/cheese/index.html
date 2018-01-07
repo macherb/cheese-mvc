@@ -29,8 +29,10 @@ $(document).ready(function(){
     <tr th:each="cheese : ${cheeses}">
         <td th:text="${cheese.name}"></td>
         <td th:text="${cheese.description}"></td>
-        <td th:text="${cheese.category.name}"></td>
-        <td><a data-toggle="tooltip" th:title="'Click to edit the name, description and category of this cheese'" th:href="@{'/cheese/edit/' + ${cheese.id}}">edit</a></td>
+        <td th:text="@{${cheese.category} != NULL ? ${cheese.category.name}}"></td>
+        <td>
+            <a data-toggle="tooltip" th:title="'Click to edit the name, description and category of this cheese'" th:href="@{'/cheese/edit/' + ${cheese.id}}">edit</a>
+        </td>
     </tr>
 
 </table>
