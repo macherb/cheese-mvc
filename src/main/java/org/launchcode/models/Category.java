@@ -20,6 +20,12 @@ public class Category {
     @JoinColumn(name = "category_id")
     private List<Cheese> cheeseList = new ArrayList<>();
 
+    public static String titleList = "Categories";
+
+    public static String titleAdd = "Add Category";
+
+    public static String titleRemove = "Remove Category";
+
     public Category() {
     }
 
