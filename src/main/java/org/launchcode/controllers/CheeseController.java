@@ -42,7 +42,7 @@ public class CheeseController {
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddCheeseForm(Model model) {
-        model.addAttribute("title", "Add Cheese");
+        model.addAttribute("title", Cheese.titleAdd);
         model.addAttribute(new Cheese());
         model.addAttribute("categories", categoryDao.findAll());
         return "cheese/add";
@@ -56,7 +56,7 @@ public class CheeseController {
             Model model) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Cheese");
+            model.addAttribute("title", Cheese.titleAdd);
             model.addAttribute("categories", categoryDao.findAll());
             return "cheese/add";
         }
@@ -64,17 +64,37 @@ public class CheeseController {
         Category cat = categoryDao.findOne(categoryId);
         newCheese.setCategory(cat);
         cheeseDao.save(newCheese);
-        return "redirect:";
+        return "redirect:";//will it have cheeses and title?
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveCheeseForm(Model model) {
         model.addAttribute("cheeses", cheeseDao.findAll());
-        model.addAttribute("title", "Remove Cheese");
+        model.addAttribute("title", Cheese.titleRemove);
         return "cheese/remove";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
+    public String processRemoveCheeseForm(Model model, @RequestParam int[] cheeseIds) {
+        int i = 0;
+        String all="";
+        final Iterable<Menu> menus = menuDao.findAll();
+        for (int cheeseId : cheeseIds) {
+            final Cheese cheese = cheeseDao.findOne(cheeseId);
+            for (Menu menu : menus) {
+                if (menu.getCheeses().contains(cheese)) {
+                    i++;
+                    all += " " + menu.getName();
+                }
+            }
+        }
+        model.addAttribute("cheeses", cheeseDao.findAll());
+        model.addAttribute("title", Cheese.titleRemove);
+        model.addAttribute("total", "Remove from " + i + " menu(s):" + all);
+        return "cheese/confirmRemove";
+    }
+
+    @RequestMapping(value = "confirmRemove", method = RequestMethod.POST)
     public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
 
         final Iterable<Menu> menus=menuDao.findAll();
