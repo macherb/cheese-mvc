@@ -32,6 +32,10 @@ public class Cheese {
 
     public static String titleList = "My Cheeses";
 
+    public static String titleAdd = "Add Cheese";
+
+    public static String titleRemove = "Remove Cheese";
+
     public Cheese(String name, String description) {
         this.name = name;
         this.description = description;
