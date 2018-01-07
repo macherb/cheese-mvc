@@ -27,6 +27,7 @@
             <ul class="nav navbar-nav">
                 <li th:class="${title == 'Categories' ? 'active' : ''}"><a href="/category">List</a></li>
                 <li th:class="${title == 'Add Category' ? 'active' : ''}"><a href="/category/add">Add</a></li>
+                <li th:class="${title == 'Remove Category' ? 'active' : ''}"><a href="/category/remove">Remove</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cheese<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -69,7 +70,7 @@
 
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li th:class="${title == cheese.titleList ? 'active' : ''}"><a href="/cheese">List</a></li>
+                <li th:class="${title == 'My Cheeses' ? 'active' : ''}"><a href="/cheese">List</a></li>
                 <li th:class="${title == 'Add Cheese' ? 'active' : ''}"><a href="/cheese/add">Add</a></li>
                 <li th:class="${title == 'Remove Cheese' ? 'active' : ''}"><a href="/cheese/remove">Remove</a></li>
                 <li class="dropdown">
@@ -77,6 +78,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="/category">List</a></li>
                         <li><a href="/category/add">Add</a></li>
+                        <li><a href="/category/remove">Remove</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -120,6 +122,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="/category">List</a></li>
                         <li><a href="/category/add">Add</a></li>
+                        <li><a href="/category/remove">Remove</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -162,6 +165,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="/category">List</a></li>
                         <li><a href="/category/add">Add</a></li>
+                        <li><a href="/category/remove">Remove</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -213,6 +217,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="/category">List</a></li>
                         <li><a href="/category/add">Add</a></li>
+                        <li><a href="/category/remove">Remove</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
