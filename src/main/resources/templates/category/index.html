@@ -20,11 +20,15 @@ $(document).ready(function(){
 
     <tr>
         <th>Name</th>
+        <th></th>
     </tr>
 
     <tr th:each="category : ${categories}">
         <td>
-            <a data-toggle="tooltip" th:title="'Click to see a list of ' + ${category.name} + ' cheeses'" th:href="'/cheese/category/' + ${category.id}" th:text="${category.name}"></a>
+            <a data-toggle="tooltip" th:title="'Click to see a list of ' + ${category.name} + ' cheese(s)'" th:href="'/cheese/category/' + ${category.id}" th:text="${category.name}"></a>
+        </td>
+        <td>
+            <a data-toggle="tooltip" th:title="'Click to edit the name of this category'" th:href="@{'/category/edit/' + ${category.id}}">edit</a>
         </td>
     </tr>
 
