@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<script>
+$(document).ready(function(){
+    $('.btn-primary').tooltip({title: "Remove these cheese(s) from the database", trigger: "hover"});
+});
+</script>
+
+<body>
+
+<!--<h1 th:text="${title}">Default Title</h1>-->
+
+<nav th:replace="fragments :: navigationCheese"></nav>
+
+<form method="post" style="margin-top:72px">
+    <label th:text="${total}"></label>
+    <br />
+    <input class="btn btn-primary" type="submit" value="Remove Cheese(s)" />
+</form>
+
+</body>
+</html>
