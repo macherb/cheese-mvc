@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<script>
+$(document).ready(function(){
+    $('.btn-primary').tooltip({title: "Remove these categories from the database", trigger: "hover"});
+});
+
+function callFunction() {
+  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+
+  document.querySelectorAll('input[type="submit"]')[0].disabled = true;
+  if (checkedOne) {
+    document.querySelectorAll('input[type="submit"]')[0].disabled = false;
+  }
+}
+</script>
+
+<body>
+
+<!--<h1 th:text="${title}">Default Title</h1>-->
+
+<nav th:replace="fragments :: navigationCategory"></nav>
+
+<form method="post" style="margin-top:72px">
+
+    <div th:each="category : ${categories}">
+        <input type="checkbox" name="categoryIds" onchange="callFunction()" th:value="${category.id}" th:id="${category.id}"/>
+        <label th:for="${category.id}" th:text="${category.name}"></label>
+        <br />
+    </div>
+
+    <input disabled="" class="btn btn-primary" type="submit" value="Remove Categories" />
+</form>
+
+</body>
+</html>
