@@ -99,6 +99,7 @@ public class CategoryController {
 
         categoryDao.save(newCategory);
         model.addAttribute("categories", categoryDao.findAll());
+        model.addAttribute("title", Category.titleList);
         return "category/index";//return "redirect:";//return "category/edit";
     }
 }
