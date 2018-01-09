@@ -142,18 +142,18 @@ public class CheeseController {
                                   int categoryId) {
         Cheese newCheese = cheeseDao.findOne(cheeseId);
 
-//        model.addAttribute(name);
-
         newCheese.setName(name);
-        model.addAttribute("name", newCheese.getName());
+//        model.addAttribute("name", newCheese.getName());
 
         newCheese.setDescription(description);
-        model.addAttribute("description", newCheese.getDescription());
+//        model.addAttribute("description", newCheese.getDescription());
 
         Category cat = categoryDao.findOne(categoryId);
         newCheese.setCategory(cat);
 
         cheeseDao.save(newCheese);
+        model.addAttribute("cheeses", cheeseDao.findAll());
+        model.addAttribute("title", Cheese.titleList);//"My Cheeses");
         return "cheese/index";//return "redirect:";//return "cheese/edit";
     }
 }
