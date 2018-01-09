@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
+<!--<script th:replace="fragments :: modalScript"></script>-->
 <script>
 $(document).ready(function(){
     $('.btn-primary').tooltip({title: "Save these changes", trigger: "hover"});
     $('.form-control-static').tooltip({title: "Name must be between three and fifteen characters", trigger: "hover"});
 });
 </script>
+<!--<style th:replace="fragments :: modalStyle"></style>-->
 <body>
 
 <nav th:replace="fragments :: navigationCategory"></nav>
@@ -22,5 +24,7 @@ $(document).ready(function(){
     <input class="btn btn-primary" type="submit" value="Edit Category" />
 </form>
 
+<!--<div th:replace="fragments :: modal"></div>
+-->
 </body>
 </html>
