@@ -2,11 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
-</script>
+<script th:replace="fragments :: tooltip"></script>
 
 <body>
 
@@ -24,7 +20,7 @@ $(document).ready(function(){
 
     <tr th:each="menu : ${menus}">
         <td>
-            <a data-toggle="tooltip" th:title="'Click to see a list of cheeses in the ' + ${menu.name} + ' menu'"  th:href="'/menu/view/' + ${menu.id}" th:text="${menu.name}"></a>
+            <a data-toggle="tooltip" th:title="'Click to see a list of cheese(s) in the ' + ${menu.name} + ' menu'"  th:href="'/menu/view/' + ${menu.id}" th:text="${menu.name}"></a>
         </td>
     </tr>
 
