@@ -6,12 +6,7 @@
 
 <body>
 
-<!--<h1 th:text="${title}">Default Title</h1>-->
-
 <nav th:replace="fragments :: navigationCheese"></nav>
-
-<p style="margin-top:72px" th:unless="${cheeses} and ${cheeses.size()}">no cheese :(</p>
-
 
 <table class="table" style="margin-top:72px">
 
@@ -32,6 +27,8 @@
     </tr>
 
 </table>
+
+<p th:unless="${cheeses} and ${cheeses.size()}">no cheese :(</p>
 
 </body>
 </html>
