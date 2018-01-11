@@ -1,9 +1,9 @@
 package org.launchcode.controllers;
 
 import org.launchcode.models.Category;
-import org.launchcode.models.Cheese;
+//import org.launchcode.models.Cheese;
 import org.launchcode.models.data.CategoryDao;
-import org.launchcode.models.data.CheeseDao;
+//import org.launchcode.models.data.CheeseDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +18,8 @@ public class CategoryController {
     @Autowired
     private CategoryDao categoryDao;
 
-    @Autowired
-    private CheeseDao cheeseDao;
+    //@Autowired
+    //private CheeseDao cheeseDao;
 
     @RequestMapping(value = "")
     public String index(Model model) {
@@ -59,27 +59,28 @@ public class CategoryController {
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
     public String processRemoveCategoryForm(Model model, @RequestParam int[] categoryIds) {
-        int i = 0;
-        String all = "";
-        final Iterable<Cheese> cheeses = cheeseDao.findAll();
+        //int i = 0;
+        //String all = "";
+        //final Iterable<Cheese> cheeses = cheeseDao.findAll();
         for (int categoryId : categoryIds) {
             final Category category = categoryDao.findOne(categoryId);
-            for (Cheese cheese : cheeses) {
+            /*for (Cheese cheese : cheeses) {
                 if (cheese.getCategory() == category) {
                     i++;
-                    all += " " + cheese.getName();
-                }
-            }
+                    all += " " + cheese.getName();*/
+                    categoryDao.delete(category);
+                //}
+            //}
         }
         model.addAttribute("categories", categoryDao.findAll());
         model.addAttribute("title", Category.titleRemove);
-        model.addAttribute("total", "Remove category of " + i + " cheese(s):" + all);
-        return "category/confirmRemove";//"redirect:";
+        //model.addAttribute("total", "Remove category of " + i + " cheese(s):" + all);
+        return "redirect:";//"category/confirmRemove";
     }
 
     @RequestMapping(value = "confirmRemove", method = RequestMethod.POST)
-    public String processRemoveCategoryForm(@RequestParam int[] categoryIds) {
-
+    public String processRemoveCategoryForm(/*@RequestParam int[] categoryIds*/) {
+/*
         final Iterable<Cheese> cheeses = cheeseDao.findAll();
         for (int categoryId : categoryIds) {
             final Category category = categoryDao.findOne(categoryId);
@@ -88,8 +89,8 @@ public class CategoryController {
                     categoryDao.delete(category);
                 }
             }
-        }
-        return "redirect:";
+        }*/
+        return "category/index";//return "redirect:";
     }
 
     @RequestMapping(value = "edit/{categoryId}", method = RequestMethod.GET)
