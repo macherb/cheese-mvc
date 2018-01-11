@@ -6,11 +6,7 @@
 
 <body>
 
-<!--<h1 th:text="${title}">Default Title</h1>-->
-
 <nav th:replace="fragments :: navigationMenu"></nav>
-
-<p style="margin-top:72px" th:unless="${menus} and ${menus.size()}">no menu :(</p>
 
 <table class="table" style="margin-top:72px">
 
@@ -25,6 +21,8 @@
     </tr>
 
 </table>
+
+<p th:unless="${menus} and ${menus.size()}">no menu :(</p>
 
 </body>
 </html>
