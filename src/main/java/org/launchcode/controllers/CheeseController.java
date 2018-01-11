@@ -85,13 +85,17 @@ public class CheeseController {
                 if (menu.getCheeses().contains(cheese)) {
                     i++;
                     all += " " + menu.getName();
+                    menu.getCheeses().remove(cheese);
+                    menuDao.save(menu);
+                    //cheeseDao.delete(cheese);
                 }
+                cheeseDao.delete(cheese);
             }
         }
         model.addAttribute("cheeses", cheeseDao.findAll());
         model.addAttribute("title", Cheese.titleRemove);
         model.addAttribute("total", "Remove from " + i + " menu(s):" + all);
-        return "cheese/confirmRemove";
+        return "redirect:";//return "cheese/confirmRemove";
     }
 
     @RequestMapping(value = "confirmRemove", method = RequestMethod.POST)
@@ -123,12 +127,11 @@ public class CheeseController {
     @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.GET)
     public String displayEditForm(Model model, @PathVariable int cheeseId) {
         model.addAttribute("title", "Edit Cheese");
-        Cheese newCheese = cheeseDao.findOne(cheeseId);
-        model.addAttribute(newCheese);
-        //model.addAttribute("cheeseId", cheeseId);
-        model.addAttribute("name1", newCheese.getName());
-        model.addAttribute("description1", newCheese.getDescription());
-        model.addAttribute("category", newCheese.getCategory());
+        Cheese cheese = cheeseDao.findOne(cheeseId);
+        //model.addAttribute(cheese);
+        model.addAttribute("name1", cheese.getName());
+        model.addAttribute("description1", cheese.getDescription());
+        model.addAttribute("category", cheese.getCategory());
 
         model.addAttribute("categories", categoryDao.findAll());
 
@@ -137,31 +140,26 @@ public class CheeseController {
 
     @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.POST)
     public String processEditForm(Model model,
-                                  @ModelAttribute  @Valid Cheese newCheese,
-                                  Errors errors,
+                                  //@ModelAttribute  @Valid Cheese cheese,
+                                  //Errors errors,
                                   @PathVariable int cheeseId,
                                   String name1,
                                   String description1,
                                   int categoryId) {
-        if (errors.hasErrors()) {
+        /*if (errors.hasErrors()) {
             model.addAttribute("title", "Edit Cheese");
-            //newCheese = cheeseDao.findOne(cheeseId);
-            //model.addAttribute(newCheese);
-            //model.addAttribute("cheeseId", cheeseId);
-            model.addAttribute("name1", newCheese.getName());
-            model.addAttribute("description1", newCheese.getDescription());
-            model.addAttribute("category", newCheese.getCategory());
+            model.addAttribute("name1", cheese.getName());
+            model.addAttribute("description1", cheese.getDescription());
+            model.addAttribute("category", cheese.getCategory());
             model.addAttribute("categories", categoryDao.findAll());
             return "cheese/edit";
-        }
+        }*/
 
-        newCheese = cheeseDao.findOne(cheeseId);
+        Cheese newCheese = cheeseDao.findOne(cheeseId);
 
         newCheese.setName(name1);
-//        model.addAttribute("name", newCheese.getName());
 
         newCheese.setDescription(description1);
-//        model.addAttribute("description", newCheese.getDescription());
 
         Category cat = categoryDao.findOne(categoryId);
         newCheese.setCategory(cat);
