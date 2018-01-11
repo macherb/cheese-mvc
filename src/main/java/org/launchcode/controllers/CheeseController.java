@@ -124,9 +124,10 @@ public class CheeseController {
     public String displayEditForm(Model model, @PathVariable int cheeseId) {
         model.addAttribute("title", "Edit Cheese");
         Cheese newCheese = cheeseDao.findOne(cheeseId);
-        model.addAttribute("cheeseId", cheeseId);
-        model.addAttribute("name", newCheese.getName());
-        model.addAttribute("description", newCheese.getDescription());
+        model.addAttribute(newCheese);
+        //model.addAttribute("cheeseId", cheeseId);
+        model.addAttribute("name1", newCheese.getName());
+        model.addAttribute("description1", newCheese.getDescription());
         model.addAttribute("category", newCheese.getCategory());
 
         model.addAttribute("categories", categoryDao.findAll());
@@ -136,16 +137,30 @@ public class CheeseController {
 
     @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.POST)
     public String processEditForm(Model model,
+                                  @ModelAttribute  @Valid Cheese newCheese,
+                                  Errors errors,
                                   @PathVariable int cheeseId,
-                                  String name,
-                                  String description,
+                                  String name1,
+                                  String description1,
                                   int categoryId) {
-        Cheese newCheese = cheeseDao.findOne(cheeseId);
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Edit Cheese");
+            //newCheese = cheeseDao.findOne(cheeseId);
+            //model.addAttribute(newCheese);
+            //model.addAttribute("cheeseId", cheeseId);
+            model.addAttribute("name1", newCheese.getName());
+            model.addAttribute("description1", newCheese.getDescription());
+            model.addAttribute("category", newCheese.getCategory());
+            model.addAttribute("categories", categoryDao.findAll());
+            return "cheese/edit";
+        }
 
-        newCheese.setName(name);
+        newCheese = cheeseDao.findOne(cheeseId);
+
+        newCheese.setName(name1);
 //        model.addAttribute("name", newCheese.getName());
 
-        newCheese.setDescription(description);
+        newCheese.setDescription(description1);
 //        model.addAttribute("description", newCheese.getDescription());
 
         Category cat = categoryDao.findOne(categoryId);
