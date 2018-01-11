@@ -60,23 +60,36 @@ public class CategoryController {
     @RequestMapping(value = "remove", method = RequestMethod.POST)
     public String processRemoveCategoryForm(Model model, @RequestParam int[] categoryIds) {
         int i = 0;
-        String all="";
-        final Iterable<Cheese> cheeses=cheeseDao.findAll();
-        for (int categoryId: categoryIds) {
+        String all = "";
+        final Iterable<Cheese> cheeses = cheeseDao.findAll();
+        for (int categoryId : categoryIds) {
             final Category category = categoryDao.findOne(categoryId);
             for (Cheese cheese : cheeses) {
                 if (cheese.getCategory() == category) {
                     i++;
                     all += " " + cheese.getName();
                 }
-                else {
-                    ;//categoryDao.delete(category);
-                }
             }
         }
         model.addAttribute("categories", categoryDao.findAll());
-        model.addAttribute("title", i + " cheese(s) found:" + all);
-        return "category/remove";//"redirect:";
+        model.addAttribute("title", Category.titleRemove);
+        model.addAttribute("total", "Remove category of " + i + " cheese(s):" + all);
+        return "category/confirmRemove";//"redirect:";
+    }
+
+    @RequestMapping(value = "confirmRemove", method = RequestMethod.POST)
+    public String processRemoveCategoryForm(@RequestParam int[] categoryIds) {
+
+        final Iterable<Cheese> cheeses = cheeseDao.findAll();
+        for (int categoryId : categoryIds) {
+            final Category category = categoryDao.findOne(categoryId);
+            for (Cheese cheese : cheeses) {
+                if (cheese.getCategory() == category) {
+                    categoryDao.delete(category);
+                }
+            }
+        }
+        return "redirect:";
     }
 
     @RequestMapping(value = "edit/{categoryId}", method = RequestMethod.GET)
