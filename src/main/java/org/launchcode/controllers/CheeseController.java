@@ -128,38 +128,31 @@ public class CheeseController {
     public String displayEditForm(Model model, @PathVariable int cheeseId) {
         model.addAttribute("title", "Edit Cheese");
         Cheese cheese = cheeseDao.findOne(cheeseId);
-        //model.addAttribute(cheese);
-        model.addAttribute("name1", cheese.getName());
-        model.addAttribute("description1", cheese.getDescription());
+        model.addAttribute(cheese);
         model.addAttribute("category", cheese.getCategory());
-
         model.addAttribute("categories", categoryDao.findAll());
-
         return "cheese/edit";
     }
 
     @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.POST)
     public String processEditForm(Model model,
-                                  //@ModelAttribute  @Valid Cheese cheese,
-                                  //Errors errors,
+                                  @ModelAttribute  @Valid Cheese cheese,
+                                  Errors errors,
                                   @PathVariable int cheeseId,
-                                  String name1,
-                                  String description1,
                                   int categoryId) {
-        /*if (errors.hasErrors()) {
+        if (errors.hasErrors()) {
             model.addAttribute("title", "Edit Cheese");
-            model.addAttribute("name1", cheese.getName());
-            model.addAttribute("description1", cheese.getDescription());
-            model.addAttribute("category", cheese.getCategory());
+            model.addAttribute(cheese);
+            model.addAttribute("category", categoryId);
             model.addAttribute("categories", categoryDao.findAll());
             return "cheese/edit";
-        }*/
+        }
 
         Cheese newCheese = cheeseDao.findOne(cheeseId);
 
-        newCheese.setName(name1);
+        newCheese.setName(cheese.getName());
 
-        newCheese.setDescription(description1);
+        newCheese.setDescription(cheese.getDescription());
 
         Category cat = categoryDao.findOne(categoryId);
         newCheese.setCategory(cat);
