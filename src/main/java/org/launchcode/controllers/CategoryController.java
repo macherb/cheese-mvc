@@ -96,20 +96,26 @@ public class CategoryController {
     @RequestMapping(value = "edit/{categoryId}", method = RequestMethod.GET)
     public String displayEditForm(Model model, @PathVariable int categoryId) {
         model.addAttribute("title", "Edit Category");
-        Category newCategory = categoryDao.findOne(categoryId);
-        model.addAttribute("categoryId", categoryId);
-        model.addAttribute("name", newCategory.getName());
+        Category category = categoryDao.findOne(categoryId);
+        model.addAttribute(category);
 
         return "category/edit";
     }
 
     @RequestMapping(value = "edit/{categoryId}", method = RequestMethod.POST)
     public String processEditForm(Model model,
-                                  @PathVariable int categoryId,
-                                  String name) {
+                                  @ModelAttribute  @Valid Category category,
+                                  Errors errors,
+                                  @PathVariable int categoryId) {
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Edit Category");
+            model.addAttribute(category);
+            return "cheese/edit";
+        }
+
         Category newCategory = categoryDao.findOne(categoryId);
 
-        newCategory.setName(name);
+        newCategory.setName(category.getName());
 
         categoryDao.save(newCategory);
         model.addAttribute("categories", categoryDao.findAll());
