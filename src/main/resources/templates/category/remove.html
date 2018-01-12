@@ -29,7 +29,9 @@ function callFunction() {
     <div th:each="category : ${categories}">
         <input type="checkbox" name="categoryIds" onchange="callFunction()" th:value="${category.id}" th:id="${category.id}"/>
         <label th:for="${category.id}" th:text="${category.name}"></label>
-        <br />
+        <ul>
+            <li th:each="cheese : ${category.cheeseList}" th:text="${cheese.name}"></li>
+        </ul>
     </div>
 
     <input disabled="" class="btn btn-primary" type="submit" value="Remove Categories" />
