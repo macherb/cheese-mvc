@@ -21,9 +21,11 @@ public class Menu {
     @ManyToMany
     private List<Cheese> cheeses;
 
-    public static String titleList = "Menus";
+    public static final String titleList = "Menus";
 
-    public static String titleAdd = "Add Menu";
+    public static final String titleAdd = "Add Menu";
+
+    public static final String titleRemove = "Remove Menu";
 
     public Menu() {
 
