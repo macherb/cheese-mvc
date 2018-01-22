@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<script>
+$(document).ready(function(){
+    $('.btn-primary').tooltip({title: "Remove these menu(s) from the database", trigger: "hover"});
+});
+
+function callFunction() {
+  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+
+  document.querySelectorAll('input[type="submit"]')[0].disabled = true;
+  if (checkedOne) {
+    document.querySelectorAll('input[type="submit"]')[0].disabled = false;
+  }
+}
+</script>
+
+<body>
+
+<nav th:replace="fragments :: navigationMenu"></nav>
+
+<form method="post" style="margin-top:72px">
+
+    <div th:each="menu : ${menus}">
+        <input type="checkbox" name="menuIds" onchange="callFunction()" th:value="${menu.id}" th:id="${menu.id}"/>
+        <label th:for="${menu.id}" th:text="${menu.name}"></label>
+        <ul>
+            <li th:each="cheese : ${menu.cheeses}" th:text="${cheese.name}"></li>
+        </ul>
+    </div>
+
+    <input disabled="" class="btn btn-primary" type="submit" value="Remove Categories" />
+</form>
+
+</body>
+</html>
