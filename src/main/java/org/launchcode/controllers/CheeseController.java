@@ -35,7 +35,7 @@ public class CheeseController {
     public String index(Model model) {
 
         model.addAttribute("cheeses", cheeseDao.findAll());
-        model.addAttribute("title", Cheese.titleList);//"My Cheeses");
+        model.addAttribute("title", Cheese.getTitleList());
 
         return "cheese/index";
     }
@@ -159,7 +159,7 @@ public class CheeseController {
 
         cheeseDao.save(newCheese);
         model.addAttribute("cheeses", cheeseDao.findAll());
-        model.addAttribute("title", Cheese.titleList);//"My Cheeses");
+        model.addAttribute("title", Cheese.getTitleList());
         return "cheese/index";//return "redirect:";//return "cheese/edit";
     }
 }
