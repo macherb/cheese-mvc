@@ -30,7 +30,7 @@ public class Cheese {
 
     ///private List<Cheese> cheeses;
 
-    public static String titleList = "My Cheeses";
+    private static String titleList = "My Cheeses";
 
     public static String titleAdd = "Add Cheese";
 
@@ -74,6 +74,10 @@ public class Cheese {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public static String getTitleList() {
+        return titleList;
     }
 
     /*public List<Menu> getMenus() {
