@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -90,5 +87,23 @@ public class MenuController {
         theMenu.addItem(theCheese);
         menuDao.save(theMenu);
         return "redirect:view/" + theMenu.getId();
+    }
+
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemoveMenuForm(Model model) {
+        model.addAttribute("menus", menuDao.findAll());
+        model.addAttribute("title", Menu.titleRemove);
+        return "menu/remove";
+    }
+
+    @RequestMapping(value = "remove", method = RequestMethod.POST)
+    public String processRemoveMenuForm(Model model, @RequestParam int[] menuIds) {
+        for (int menuId : menuIds) {
+            final Menu menu = menuDao.findOne(menuId);
+            menuDao.delete(menu);
+        }
+        model.addAttribute("categories", menuDao.findAll());
+        model.addAttribute("title", Menu.titleRemove);
+        return "redirect:";//"menu/confirmRemove";
     }
 }
