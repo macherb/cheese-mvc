@@ -40,6 +40,7 @@ $(document).ready(function(){
                     <ul class="dropdown-menu">
                         <li><a href="/menu">List</a></li>
                         <li><a href="/menu/add">Add</a></li>
+                        <li><a href="/menu/remove">Remove</a></li>
                     </ul>
                 </li>
 
@@ -123,6 +124,7 @@ $(document).ready(function(){
             <ul class="nav navbar-nav">
                 <li th:class="${title == 'Menus' ? 'active' : ''}"><a href="/menu">List</a></li>
                 <li th:class="${title == 'Add Menu' ? 'active' : ''}"><a href="/menu/add">Add</a></li>
+                <li th:class="${title == 'Remove Menu' ? 'active' : ''}"><a href="/menu/remove">Remove</a></li>
                 <li th:replace="fragments :: notCategory"></li>
                 <li th:replace="fragments :: notCheese"></li>
                 <li th:replace="fragments :: notUser"></li>
