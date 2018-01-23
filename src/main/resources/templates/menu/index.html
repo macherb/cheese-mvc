@@ -12,11 +12,15 @@
 
     <tr>
         <th>Name</th>
+        <th></th>
     </tr>
 
     <tr th:each="menu : ${menus}">
         <td>
             <a data-toggle="tooltip" th:title="'Click to see a list of cheese(s) in the ' + ${menu.name} + ' menu'"  th:href="'/menu/view/' + ${menu.id}" th:text="${menu.name}"></a>
+        </td>
+        <td>
+            <a data-toggle="tooltip" th:title="'Click to edit the name of this menu'" th:href="@{'/menu/edit/' + ${menu.id}}">edit</a>
         </td>
     </tr>
 
