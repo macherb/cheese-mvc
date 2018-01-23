@@ -183,6 +183,30 @@ $(document).ready(function(){
     </div>
 </nav>
 
+<nav class="navbar navbar-inverse navbar-fixed-top" th:fragment="navigationUser_menus">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" th:text="${title}">Default Title</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li th:replace="fragments :: notCategory"></li>
+                <li th:replace="fragments :: notCheese"></li>
+                <li th:replace="fragments :: notMenu"></li>
+                <li th:replace="fragments :: notUser"></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
 <div th:fragment="modal" class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
 
