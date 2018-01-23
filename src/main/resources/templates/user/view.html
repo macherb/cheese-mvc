@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<script th:replace="fragments :: tooltip"></script>
+
+<body>
+
+<nav th:replace="fragments :: navigationUser_menus"></nav>
+
+<ul style="margin-top:72px">
+    <li th:each="menu : ${menus}" th:text="${menu.name}"></li>
+</ul>
+
+<p th:unless="${menus.size()}"><i>No menu yet</i></p>
+
+<p>
+    <a data-toggle="tooltip" th:title="'Add a menu to the ' + ${title} + ' user'"  th:href="'/user/add-item/' + ${userId}">Add Menu</a>
+</p>
+
+</body>
+</html>
