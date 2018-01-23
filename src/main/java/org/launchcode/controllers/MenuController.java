@@ -106,4 +106,35 @@ public class MenuController {
         model.addAttribute("title", Menu.titleRemove);
         return "redirect:";//"menu/confirmRemove";
     }
+
+    @RequestMapping(value = "edit/{menuId}", method = RequestMethod.GET)
+    public String displayEditForm(Model model, @PathVariable int menuId) {
+        model.addAttribute("title", "Edit Menu");
+        Menu menu = menuDao.findOne(menuId);
+        model.addAttribute(menu);
+
+        return "menu/edit";
+    }
+
+    @RequestMapping(value = "edit/{menuId}", method = RequestMethod.POST)
+    public String processEditForm(Model model,
+                                  @ModelAttribute  @Valid Menu menu,
+                                  Errors errors,
+                                  @PathVariable int menuId) {
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Edit Menu");
+            model.addAttribute(menu);
+            return "menu/edit";
+        }
+
+        Menu newMenu = menuDao.findOne(menuId);
+
+        newMenu.setName(menu.getName());
+
+        menuDao.save(newMenu);
+        model.addAttribute("menus", menuDao.findAll());
+        model.addAttribute("title", Menu.titleList);
+        return "menu/index";//return "redirect:";//return "menu/edit";
+    }
+
 }
