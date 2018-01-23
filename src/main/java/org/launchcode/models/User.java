@@ -3,8 +3,10 @@ package org.launchcode.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class User {
@@ -28,6 +30,9 @@ public class User {
     @Size(min=1, message = "Verify password must not be empty")
     private String  verify;
 
+    @ManyToMany
+    private List<Menu> menus;
+
     public User(String username, String email, String password, String verify) {
         this.username = username;
         this.email =    email;
@@ -36,6 +41,14 @@ public class User {
 
     public User() {
         ;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -68,5 +81,21 @@ public class User {
 
     public void setVerify(String verify) {
         this.verify = verify;
+    }
+
+    public void addItem(Menu item) {
+        menus.add(item);
+    }
+
+    /**public void removeItem(Menu item) {
+     menus.remove(item);
+     }**/
+
+    public List<Menu> getMenus() {
+        return menus;
+    }
+
+    public void setMenus(List<Menu> menus) {
+        this.menus = menus;
     }
 }
