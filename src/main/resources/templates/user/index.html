@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
+
+<script th:replace="fragments :: tooltip"></script>
+
 <body>
 
 <nav th:replace="fragments :: navigationUser"></nav>
@@ -14,7 +17,9 @@
     </tr>
 
     <tr th:each="user : ${users}">
-        <td th:text="${user.username}"></td>
+        <td>
+            <a data-toggle="tooltip" th:title="'Click to see a list of menu(s) in the ' + ${user.username} + ' user'"  th:href="'/user/view/' + ${user.id}" th:text="${user.username}"></a>
+        </td>
         <td th:text="${user.email}"></td>
         <td th:text="${user.password}"></td>
     </tr>
