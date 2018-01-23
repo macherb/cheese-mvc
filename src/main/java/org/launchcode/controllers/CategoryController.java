@@ -80,7 +80,7 @@ public class CategoryController {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Edit Category");
             model.addAttribute(category);
-            return "cheese/edit";
+            return "category/edit";
         }
 
         Category newCategory = categoryDao.findOne(categoryId);
