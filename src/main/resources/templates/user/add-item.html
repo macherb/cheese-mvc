@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<script>
+$(document).ready(function(){
+    $('.btn-primary').tooltip({title: "Add this menu to the user", trigger: "hover"});
+    $('.form-control-static').tooltip({title: "Menu must be one of these", trigger: "hover"});
+});
+</script>
+
+<body>
+
+<nav th:replace="fragments :: navigationUser_menus"></nav>
+
+<form method="post" style="max-width:600px;margin-top:72px" th:object="${form}" action="/user/add-item">
+
+    <div class="form-group">
+        <label th:for="menuId">Menu</label>
+        <select class="form-control form-control-static" name="menuId">
+            <option th:each="menu : *{menus}"
+                    th:text="${menu.name}"
+                    th:value="${menu.id}"></option>
+        </select>
+    </div>
+
+    <input type="hidden" name="userId" th:value="*{user.id}" />
+
+    <input class="btn btn-primary" type="submit" value="Add Item" />
+</form>
+
+</body>
+</html>
