@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -102,5 +99,59 @@ public class UserController {
         theUser.addItem(theMenu);
         userDao.save(theUser);
         return "redirect:view/" + theUser.getId();
+    }
+
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemoveUserForm(Model model) {
+        model.addAttribute("users", userDao.findAll());
+        model.addAttribute("title", User.titleRemove);
+        return "user/remove";
+    }
+
+    @RequestMapping(value = "remove", method = RequestMethod.POST)
+    public String processRemoveUserForm(Model model, @RequestParam int[] userIds) {
+        for (int userId : userIds) {
+            final User user = userDao.findOne(userId);
+            userDao.delete(user);
+        }
+        model.addAttribute("categories", userDao.findAll());
+        model.addAttribute("title", User.titleRemove);
+        return "redirect:";//"user/confirmRemove";
+    }
+
+    @RequestMapping(value = "edit/{userId}", method = RequestMethod.GET)
+    public String displayEditForm(Model model, @PathVariable int userId) {
+        model.addAttribute("title", "Edit User");
+        User user = userDao.findOne(userId);
+        model.addAttribute(user);
+
+        return "user/edit";
+    }
+
+    @RequestMapping(value = "edit/{userId}", method = RequestMethod.POST)
+    public String processEditForm(Model model,
+                                  @ModelAttribute  @Valid User user,
+                                  Errors errors,
+                                  @PathVariable int userId) {
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Edit User");
+            model.addAttribute(user);
+            return "user/edit";
+        }
+
+        User newUser = userDao.findOne(userId);
+
+        newUser.setUsername(user.getUsername());
+
+        newUser.setEmail(user.getEmail());
+
+        newUser.setPassword(user.getPassword());
+
+        newUser.setVerify(user.getVerify());
+
+        userDao.save(newUser);
+        model.addAttribute("users", userDao.findAll());
+        model.addAttribute("title", User.titleList);
+        return "user/index";//return "redirect:";//return "user/edit";
     }
 }
