@@ -2,8 +2,10 @@ package org.launchcode.controllers;
 
 import org.launchcode.models.Cheese;
 import org.launchcode.models.Menu;
+import org.launchcode.models.User;
 import org.launchcode.models.data.CheeseDao;
 import org.launchcode.models.data.MenuDao;
+import org.launchcode.models.data.UserDao;
 import org.launchcode.models.forms.AddMenuItemForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,9 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping(value = "menu")
 public class MenuController {
+    @Autowired
+    private UserDao userDao;
+
     @Autowired
     private MenuDao menuDao;
 
@@ -79,7 +84,7 @@ public class MenuController {
     @ModelAttribute @Valid AddMenuItemForm form, Errors errors) {
 
         if (errors.hasErrors()) {
-        model.addAttribute("form", form);
+            model.addAttribute("form", form);
             return "menu/add-item";
         }
         Cheese theCheese = cheeseDao.findOne(form.getCheeseId());
@@ -98,12 +103,32 @@ public class MenuController {
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
     public String processRemoveMenuForm(Model model, @RequestParam int[] menuIds) {
-        for (int menuId : menuIds) {
+        /*for (int menuId : menuIds) {
             final Menu menu = menuDao.findOne(menuId);
             menuDao.delete(menu);
         }
         model.addAttribute("categories", menuDao.findAll());
         model.addAttribute("title", Menu.titleRemove);
+*/
+        int i = 0;
+        String all="";
+        final Iterable<User> users = userDao.findAll();
+        for (int menuId : menuIds) {
+            final Menu menu = menuDao.findOne(menuId);
+            for (User user : users) {
+                if (user.getMenus().contains(menu)) {
+                    i++;
+                    all += " " + user.getUsername();
+                    user.getMenus().remove(menu);
+                    userDao.save(user);
+                    //menuDao.delete(menu);
+                }
+                menuDao.delete(menu);
+            }
+        }
+        model.addAttribute("menus", menuDao.findAll());
+        model.addAttribute("title", Menu.titleRemove);
+        model.addAttribute("total", "Remove from " + i + " user(s):" + all);
         return "redirect:";//"menu/confirmRemove";
     }
 
