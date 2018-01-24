@@ -30,13 +30,14 @@ $(document).ready(function(){
 
     <div class="form-group">
         <label th:for="password">Password</label>
-        <input type="password" class="form-control form-control-warning" placeholder="Can contain letters, numbers and special characters" th:field="*{password}" />
+        <input class="form-control form-control-warning" placeholder="Can contain letters, numbers and special characters" th:field="*{password}" />
         <span th:errors="*{password}" class="error"></span>
     </div>
 
     <div class="form-group">
         <label th:for="verify">Verify Password</label>
-        <input type="password" class="form-control form-control-success" placeholder="Must be the same as your password" th:field="*{verify}" />
+        <input class="form-control form-control-success" placeholder="Must be the same as your password" th:field="*{verify}" />
+        <span th:errors="*{verify}" class="error"></span>
     </div>
 
     <input class="btn btn-primary" type="submit" value="Add User" />
