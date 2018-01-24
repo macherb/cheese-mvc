@@ -97,7 +97,7 @@ $(document).ready(function(){
 
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li th:class="${title == 'My Cheeses' ? 'active' : ''}"><a href="/cheese">List</a></li>
+                <li th:class="${title == 'Cheeses' ? 'active' : ''}"><a href="/cheese">List</a></li>
                 <li th:class="${title == 'Add Cheese' ? 'active' : ''}"><a href="/cheese/add">Add</a></li>
                 <li th:class="${title == 'Remove Cheese' ? 'active' : ''}"><a href="/cheese/remove">Remove</a></li>
                 <li th:replace="fragments :: notCategory"></li>
@@ -173,7 +173,7 @@ $(document).ready(function(){
 
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li th:class="${title == 'Hello username' ? 'active' : ''}"><a href="/user">List</a></li>
+                <li th:class="${title == 'Users' ? 'active' : ''}"><a href="/user">List</a></li>
                 <li th:class="${title == 'Add User' ? 'active' : ''}"><a href="/user/add">Add</a></li>
                 <li th:class="${title == 'Remove User' ? 'active' : ''}"><a href="/user/remove">Remove</a></li>
                 <li th:replace="fragments :: notCategory"></li>
