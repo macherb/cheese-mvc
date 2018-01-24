@@ -87,9 +87,8 @@ public class CheeseController {
                     all += " " + menu.getName();
                     menu.getCheeses().remove(cheese);
                     menuDao.save(menu);
-                    //cheeseDao.delete(cheese);
+                    cheeseDao.delete(cheese);
                 }
-                cheeseDao.delete(cheese);
             }
         }
         model.addAttribute("cheeses", cheeseDao.findAll());
