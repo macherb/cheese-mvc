@@ -25,7 +25,7 @@ public class UserController {
     // Request path: /user
     @RequestMapping(value = "")
     public String index(Model model) {
-        model.addAttribute("title", "Hello username");
+        model.addAttribute("title", User.titleList);
         model.addAttribute("users", userDao.findAll());
         return "user/index";
     }
