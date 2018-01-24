@@ -33,6 +33,10 @@ public class User {
     @ManyToMany
     private List<Menu> menus;
 
+    public static final String titleList = "Users";
+
+    public static final String titleRemove = "Remove User";
+
     public User(String username, String email, String password, String verify) {
         this.username = username;
         this.email =    email;
