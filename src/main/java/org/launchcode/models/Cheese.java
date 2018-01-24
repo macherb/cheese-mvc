@@ -30,7 +30,7 @@ public class Cheese {
 
     ///private List<Cheese> cheeses;
 
-    private static String titleList = "My Cheeses";
+    private static String titleList = "Cheeses";
 
     public static String titleAdd = "Add Cheese";
 
