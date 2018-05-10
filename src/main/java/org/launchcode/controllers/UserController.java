@@ -32,7 +32,7 @@ public class UserController {
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String add(Model model) {
-        model.addAttribute("title", "Add User");
+        model.addAttribute("title", User.titleAdd);
         model.addAttribute(new User());
         return "user/add";
     }
@@ -40,6 +40,7 @@ public class UserController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(Model model, @ModelAttribute @Valid User user, Errors errors) {
         if (errors.hasErrors()) {
+            model.addAttribute("title", User.titleAdd);
             return "user/add";
         }
 
@@ -121,7 +122,7 @@ public class UserController {
 
     @RequestMapping(value = "edit/{userId}", method = RequestMethod.GET)
     public String displayEditForm(Model model, @PathVariable int userId) {
-        model.addAttribute("title", "Edit User");
+        model.addAttribute("title", User.titleEdit);
         User user = userDao.findOne(userId);
         model.addAttribute(user);
 
@@ -134,7 +135,7 @@ public class UserController {
                                   Errors errors,
                                   @PathVariable int userId) {
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Edit User");
+            model.addAttribute("title", User.titleEdit);
             model.addAttribute(user);
             return "user/edit";
         }
