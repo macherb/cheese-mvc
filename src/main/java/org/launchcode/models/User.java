@@ -35,7 +35,11 @@ public class User {
 
     public static final String titleList = "Users";
 
+    public static final String titleAdd = "Add User";
+
     public static final String titleRemove = "Remove User";
+
+    public static final String titleEdit = "Edit User";
 
     public User(String username, String email, String password, String verify) {
         this.username = username;
