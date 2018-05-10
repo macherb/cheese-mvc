@@ -29,7 +29,7 @@ public class CategoryController {
     public String displayAddCategoryForm(Model model) {
 
         model.addAttribute(new Category());
-        model.addAttribute("title", "Add Category");
+        model.addAttribute("title", Category.titleAdd);
 
         return "category/add";
     }
@@ -65,7 +65,7 @@ public class CategoryController {
 
     @RequestMapping(value = "edit/{categoryId}", method = RequestMethod.GET)
     public String displayEditForm(Model model, @PathVariable int categoryId) {
-        model.addAttribute("title", "Edit Category");
+        model.addAttribute("title", Category.titleEdit);
         Category category = categoryDao.findOne(categoryId);
         model.addAttribute(category);
 
@@ -78,7 +78,7 @@ public class CategoryController {
                                   Errors errors,
                                   @PathVariable int categoryId) {
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Edit Category");
+            model.addAttribute("title", Category.titleEdit);
             model.addAttribute(category);
             return "category/edit";
         }
