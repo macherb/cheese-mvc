@@ -13,7 +13,7 @@ public class Category {
     private int id;
 
     @NotNull
-    @Size(min=3, max=15)
+    @Size(min=3, max=15, message = "Name must be between three and fifteen characters")
     private String name;
 
     @OneToMany
@@ -25,6 +25,8 @@ public class Category {
     public static String titleAdd = "Add Category";
 
     public static String titleRemove = "Remove Category";
+
+    public static String titleEdit = "Edit Category";
 
     public Category() {
     }
