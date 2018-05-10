@@ -15,7 +15,7 @@ public class Cheese {
     private int id;
 
     @NotNull
-    @Size(min=3, max=15)
+    @Size(min=3, max=15, message = "Name must be between three and fifteen characters")
     private String name;
 
     @NotNull
@@ -30,11 +30,13 @@ public class Cheese {
 
     ///private List<Cheese> cheeses;
 
-    private static String titleList = "Cheeses";
+    public static String titleList = "Cheeses";
 
     public static String titleAdd = "Add Cheese";
 
     public static String titleRemove = "Remove Cheese";
+
+    public static String titleEdit = "Edit Cheese";
 
     public Cheese(String name, String description) {
         this.name = name;
@@ -76,9 +78,9 @@ public class Cheese {
         this.category = category;
     }
 
-    public static String getTitleList() {
+    /*public static String getTitleList() {
         return titleList;
-    }
+    }*/
 
     /*public List<Menu> getMenus() {
         return menus;
