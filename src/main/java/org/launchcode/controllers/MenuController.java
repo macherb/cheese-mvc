@@ -134,7 +134,7 @@ public class MenuController {
 
     @RequestMapping(value = "edit/{menuId}", method = RequestMethod.GET)
     public String displayEditForm(Model model, @PathVariable int menuId) {
-        model.addAttribute("title", "Edit Menu");
+        model.addAttribute("title", Menu.titleEdit);
         Menu menu = menuDao.findOne(menuId);
         model.addAttribute(menu);
 
@@ -147,7 +147,7 @@ public class MenuController {
                                   Errors errors,
                                   @PathVariable int menuId) {
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Edit Menu");
+            model.addAttribute("title", Menu.titleEdit);
             model.addAttribute(menu);
             return "menu/edit";
         }
