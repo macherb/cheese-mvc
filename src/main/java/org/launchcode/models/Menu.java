@@ -15,7 +15,7 @@ public class Menu {
     private int id;
 
     @NotNull
-    @Size(min=3, max=15)
+    @Size(min=3, max=15, message = "Name must be between three and fifteen characters")
     private String name;
 
     @ManyToMany
@@ -26,6 +26,8 @@ public class Menu {
     public static final String titleAdd = "Add Menu";
 
     public static final String titleRemove = "Remove Menu";
+
+    public static final String titleEdit = "Edit Menu";
 
     public Menu() {
 
