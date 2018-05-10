@@ -33,7 +33,7 @@ $(document).ready(function(){
             <option th:each="categori : ${categories}"
                     th:text="${categori.name}"
                     th:value="${categori.id}"
-                    th:selected="@{${category} != NULL ? ${category.id} == ${categori.id} : false}">
+                    th:selected="${category} == ${categori.id}">
             </option>
         </select>
     </div>
